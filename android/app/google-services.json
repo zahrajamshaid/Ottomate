@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "777887054216",
+    "project_id": "ottomate-99c32",
+    "storage_bucket": "ottomate-99c32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777887054216:android:55449a2bacb7dca8b1e23d",
+        "android_client_info": {
+          "package_name": "com.example.ottomate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777887054216-4pkt8m89apojqj4vpe5p8j6n5ef76fak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYqX5_nTcs2zcvSmoCGJZy5LRVU6msdpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777887054216-4pkt8m89apojqj4vpe5p8j6n5ef76fak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

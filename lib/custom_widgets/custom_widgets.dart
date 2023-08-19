@@ -167,3 +167,79 @@ class SettingCard extends StatelessWidget {
     );
   }
 }
+
+class AnimatedText extends StatefulWidget {
+  final String text;
+
+  AnimatedText(this.text);
+
+  @override
+  _AnimatedTextState createState() => _AnimatedTextState();
+}
+
+class _AnimatedTextState extends State<AnimatedText> {
+  late String _displayedText;
+  late int _characterIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _displayedText = "";
+    _characterIndex = 0;
+    _startTextAnimation();
+  }
+
+  void _startTextAnimation() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        _displayedText = widget.text.substring(0, _characterIndex);
+        _characterIndex++;
+        if (_characterIndex <= widget.text.length) {
+          _startTextAnimation();
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _displayedText,
+      style: TextStyle(
+        fontSize: 36,
+        fontWeight: FontWeight.bold,
+        color: Colors.purple, // Purple text color
+      ),
+    );
+  }
+}
+
+class RoundedButton extends StatelessWidget {
+  final String text;
+  final Color color;
+  final VoidCallback onPressed;
+
+  RoundedButton({
+    required this.text,
+    required this.color,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 18),
+      ),
+    );
+  }
+}

@@ -14,20 +14,24 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children:[PageView(
-      
-          children: [
-            IntroScreen1(),
-            IntroScreen2(),
-            IntroScreen3(),
-            HomeScreen(),
-          ]
-        ),
-       
-        ],
-      ));
+    return MaterialApp(
+debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        
+        body: Stack(
+          children:[PageView(
+        
+            children: [
+              IntroScreen1(),
+              IntroScreen2(),
+              IntroScreen3(),
+              HomeScreen(),
+            ]
+          ),
+         
+          ],
+        )),
+    );
     
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ottomate/custom_widgets/custom_widgets.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,30 +11,72 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController= TextEditingController();
+ final _auth= FirebaseAuth.instance;
+
+void login(){
+  _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text.toString()).then((value) {
+    Navigator.push(context, MaterialPageRoute(builder: (context){return HomeScreen();}));
+  }).onError((error, stackTrace) {
+showDialog(
+  context: context, // The current context.
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: Text('Failed'),
+      content: Text('Not registered or wrong username/password'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context); // Close the dialog.
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+  },
+);
+
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.purple[50],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Hero(
+          Hero(
               tag: 'logo',
               child: Container(
                 height: 200.0,
-                child: Image.asset('lib/assets/logo.jpg'),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), // Rounded corners
+                  image: DecorationImage(
+                    image: AssetImage('lib/assets/logo.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             SizedBox(
               height: 48.0,
             ),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              controller: emailController,
               decoration: InputDecoration(
                 hintText: 'Enter your email',
                 contentPadding:
@@ -56,9 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 8.0,
             ),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              controller: passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Enter your password.',
                 contentPadding:
@@ -87,18 +130,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.purple,
                 borderRadius: BorderRadius.all(Radius.circular(30.0)),
                 elevation: 5.0,
-                child: MaterialButton(
+                child: RoundedButton(
+                  text: "Log In",
                    color: Colors.purple,
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){return HomeScreen();}));
-                    //Implement login functionality.
+                      login();
                   },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                      style: TextStyle(color: Colors.white),
-                  ),
+                 
                 ),
               ),
             ),

@@ -131,10 +131,10 @@ class _AutomateScreenState extends State<AutomateScreen> {
     );
   }
 
-  Widget buildScenesCards() {
-    return Container(
-      height: 180,
-      child: ListView(
+  Widget buildScenesCards() {                                 
+    return Container(                                 
+      height: 180,                                 
+      child: ListView(                                 
         scrollDirection: Axis.horizontal,
         children: [
           CustomCard(
